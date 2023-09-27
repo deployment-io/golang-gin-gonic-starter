@@ -1,0 +1,11 @@
+.idea
+*.iml
+logs
+./golang-gin-gonic-starter
+.env
+.env.prod
+.env.integration
+.env.development
+.vscode
+go.work
+go.work.sum

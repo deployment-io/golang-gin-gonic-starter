@@ -1,0 +1,17 @@
+FROM golang:1.20.0-buster
+MAINTAINER Ankit Arora <ankit.j.arora@gmail.com>
+
+RUN apt update
+RUN apt install git -y
+
+# Change TimeZone
+RUN apt install tzdata -y
+ENV TZ=Asia/Kolkata
+
+COPY . /go/src/github.com/deployment-io/golang-gin-gonic-starter
+WORKDIR /go/src/github.com/deployment-io/golang-gin-gonic-starter
+
+RUN go mod tidy && go install github.com/deployment-io/golang-gin-gonic-starter
+
+ENTRYPOINT ["sh", "entrypoint-prod.sh"]
+EXPOSE 8080
