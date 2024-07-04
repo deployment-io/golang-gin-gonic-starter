@@ -33,7 +33,8 @@ func main() {
 			})
 			return
 		}
-		c.String(200, string(body))
+		out := fmt.Sprintf("calling: %s", testUrl)
+		c.String(200, out+" : "+string(body))
 	})
 	r.Run(":8080")
 }
