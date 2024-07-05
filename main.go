@@ -12,7 +12,7 @@ func main() {
 	r := gin.Default()
 	r.GET("/ping", func(c *gin.Context) {
 		c.JSON(200, gin.H{
-			"message": "pong from private service auto deployed",
+			"message": "pong from private service with preview",
 		})
 	})
 	r.GET("/test", func(c *gin.Context) {
