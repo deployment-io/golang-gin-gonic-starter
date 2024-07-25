@@ -1,8 +1,10 @@
 package main
 
 import (
+	"database/sql"
 	"fmt"
 	"github.com/gin-gonic/gin"
+	_ "github.com/go-sql-driver/mysql"
 	"io"
 	"net/http"
 	"os"
@@ -35,6 +37,32 @@ func main() {
 		}
 		out := fmt.Sprintf("calling: %s", testUrl)
 		c.String(200, out+" : "+string(body))
+	})
+	r.GET("/mysql", func(c *gin.Context) {
+		mysqlUrl := os.Getenv("MYSQL_URL")
+		db, err := sql.Open("mysql", mysqlUrl)
+
+		if err != nil {
+			c.JSON(200, gin.H{
+				"message": fmt.Sprintf("error: %s", err.Error()),
+			})
+			return
+		}
+
+		// defer the close till after the main function has finished
+		// executing
+		defer db.Close()
+
+		err = db.Ping()
+
+		if err != nil {
+			c.JSON(200, gin.H{
+				"message": fmt.Sprintf("error: %s", err.Error()),
+			})
+			return
+		}
+
+		c.String(200, "mysql connect success")
 	})
 	r.Run(":8080")
 }
