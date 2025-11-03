@@ -1,4 +1,4 @@
-FROM golang:1.20.0-buster
+FROM golang:1.22-bookworm
 MAINTAINER Ankit Arora <ankit.j.arora@gmail.com>
 
 RUN apt update
