@@ -20,6 +20,11 @@ func main() {
 			"message": "pong",
 		})
 	})
+	r.GET("/health", func(c *gin.Context) {
+		c.JSON(200, gin.H{
+			"status": "ok",
+		})
+	})
 	r.GET("/test", func(c *gin.Context) {
 		testUrl := os.Getenv("TEST_URL")
 		resp, err := http.Get(testUrl)
