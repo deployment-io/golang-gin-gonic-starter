@@ -20,7 +20,7 @@ func main() {
 			"message": "pong",
 		})
 	})
-	r.GET("/health", func(c *gin.Context) {
+	r.GET("/healthy", func(c *gin.Context) {
 		c.JSON(200, gin.H{
 			"status": "ok",
 		})
