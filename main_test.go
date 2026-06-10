@@ -24,7 +24,7 @@ func TestVersion(t *testing.T) {
 		t.Fatalf("expected status %d, got %d", http.StatusOK, w.Code)
 	}
 
-	expected := `{"version":"0.1.0"}`
+	expected := `{"version":"0.1.1"}`
 	if w.Body.String() != expected {
 		t.Fatalf("expected body %s, got %s", expected, w.Body.String())
 	}
