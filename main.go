@@ -8,7 +8,9 @@ import (
 	"os"
 )
 
-func main() {
+const Version = "0.1.1"
+
+func setupRouter() *gin.Engine {
 	r := gin.Default()
 	r.GET("/", func(c *gin.Context) {
 		c.JSON(200, gin.H{
@@ -18,6 +20,11 @@ func main() {
 	r.GET("/ping", func(c *gin.Context) {
 		c.JSON(200, gin.H{
 			"message": "pong",
+		})
+	})
+	r.GET("/version", func(c *gin.Context) {
+		c.JSON(200, gin.H{
+			"version": Version,
 		})
 	})
 	r.GET("/test", func(c *gin.Context) {
@@ -41,5 +48,10 @@ func main() {
 		out := fmt.Sprintf("calling: %s", testUrl)
 		c.String(200, out+" : "+string(body))
 	})
+	return r
+}
+
+func main() {
+	r := setupRouter()
 	r.Run(":8080")
 }
